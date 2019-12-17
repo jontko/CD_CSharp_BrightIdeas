@@ -4,11 +4,14 @@
 <hr>
 <form asp-action="Login" asp-controller="Home" method="POST">
      <h4>Email:</h4>
+     <br>
      <span asp-validation-for="EmailLogin"></span>    
      <input class="Form-Control" asp-for="EmailLogin"><br>
     
      <h4>Password:</h4>
-     <span asp-validation-for="PasswordLogin"></span>    
+     <br>
+     <span asp-validation-for="PasswordLogin"></span>
+     <br>
      <input class="Form-Control" asp-for="PasswordLogin"><br>
      <br>
      <button type="submit">Submit</button>

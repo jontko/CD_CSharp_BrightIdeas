@@ -1,9 +1,8 @@
 @{
     ViewData["Title"] = "Dashboard";
 }
-
-<h3>Hi there!</h3> 
-@* How to get the name to come through. Bring in the model, then reference with atsymbole Class or Model (?) .Alias. *@
+@model User
+<h3>Hi usersession.Alias !</h3> @* How to get the name to come through. Bring in the model, then reference with atsymbole Class or Model (?) .Alias. *@
 
 <form class="head" asp-action="Create" asp-controller="Home" method="POST">
     <textarea name="Post"  cols="50" rows="5"></textarea>

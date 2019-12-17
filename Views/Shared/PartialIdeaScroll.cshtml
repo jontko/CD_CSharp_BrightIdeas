@@ -4,9 +4,9 @@
 <h1>This is where the ideas will scroll. </h1>
 </div>
 
-Table>
+<Table>
     <thead>
-        <th>Alias/th>
+        <th>Alias</th>
         <th>Idea</th>
         <th>Like and Likes</th>
     </thead>
@@ -23,7 +23,7 @@ Table>
                 }
                 else {
                     bool check = true;
-                    foreach(Like like in Model){
+                    @* foreach(Like like in like.User){ *@
                         if(idea.UserId == ViewBag.Id){
                             check = false;
                         }

@@ -75,7 +75,6 @@ namespace BrightIdeas.Controllers
                 {
                     ModelState.AddModelError("PasswordLogin", "Password was not recognized.");
                     return View("Index");
-                    // handle failure (this should be similar to how "existing email" is handled)
                 }
                 usersession = oneUser.UserId;
                 return RedirectToAction("Dashboard");
@@ -94,7 +93,7 @@ namespace BrightIdeas.Controllers
             .Include(idea => idea.IdeaOwner)
             .ToList();
             ViewBag.Id=usersession;
-            return View("PartialIdeaScroll", AllIdeas);
+            return View("Dashboard", AllIdeas);
 
             // Looks like this is passing a List of Ideas to the dashboard. I need this passed to PartialIdeaScroll.cshtml
             // I need the Logged in user info passed to dashboard. This is in Viewbag.Id it apears. 
@@ -107,13 +106,22 @@ namespace BrightIdeas.Controllers
             return View("Index");
         }
 
+        [HttpPost("Create")]
+        public IActionResult Create(Idea idea) // (Type variable_being_passed)
+        {
+            if(ModelState.IsValid){
+            idea.UserId=(int)HttpContext.Session.GetInt32("UserID");
+            DbContext.Add(idea);
+            DbContext.SaveChanges();
+            return RedirectToAction("Dashboard");
+            }
+            return View("Dashboard", idea);
+        }
         [HttpGet("New")]
         public IActionResult New()
         {
-            return View("New");
+            return View("Dashboard");
         }
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
