@@ -1,0 +1,41 @@
+@model List<Idea> 
+
+<div class="scrollwindow">
+<h1>This is where the ideas will scroll. </h1>
+</div>
+
+Table>
+    <thead>
+        <th>Alias/th>
+        <th>Idea</th>
+        <th>Like and Likes</th>
+    </thead>
+    <tbody>
+        <!-- Declare type, element name, where you are getting element from -->
+        @foreach(Idea idea in Model){
+            <tr>
+                <td> <a href="/UserDetails/@idea.UserId"> @idea.IdeaOwner.Alias</a></td>
+                <td>@idea.Concept</td>
+                <td>@idea.Likes.Count</td>
+                    @if(ViewBag.Id == @idea.IdeaOwner.UserId)
+                {
+                    <td> <a href="/deleteidea/@idea.IdeaId">| Delete |</a></td>
+                }
+                else {
+                    bool check = true;
+                    foreach(Like like in Model){
+                        if(idea.UserId == ViewBag.Id){
+                            check = false;
+                        }
+                    }
+                    if(check == true){
+                        <td> <a href="/Likeidea/@idea.IdeaId">| Like |</a></td>
+                    }
+                    else{
+                        <td> <a href="/Un-Likeidea/@idea.IdeaId">| Un-Like |</a> </td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</Table>
